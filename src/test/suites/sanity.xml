@@ -3,13 +3,13 @@
 <suite name="HireLogic" verbose="1" thread-count="2" parallel="tests">
     <test name="Sanity Test1">
         <classes>
-            <class name="web.Test.ExploratoryTest"/>
+            <class name="web.Test.Test1"/>
         </classes>
     </test>
 
     <test name="Sanity Test2">
         <classes>
-            <class name="web.Test.ExploratoryTest2"/>
+            <class name="web.Test.Test2"/>
         </classes>
     </test>
 </suite>

@@ -1,15 +1,12 @@
 package web.Test;
 
-import Web.Pages.AnalyticsPage;
 import Web.Pages.CustomInsights.CustomInsightsPage;
-import Web.Pages.TeamViewPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import utils.Constants;
 
-public class ExploratoryTest extends BaseTest{
+public class Test1 extends BaseTest{
     protected CustomInsightsPage customInsightsPage;
 
     @BeforeClass

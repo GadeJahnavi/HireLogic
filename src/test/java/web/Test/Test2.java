@@ -5,10 +5,9 @@ import Web.Pages.TeamViewPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import utils.Constants;
 
-public class ExploratoryTest2 extends BaseTest{
+public class Test2 extends BaseTest{
     protected AnalyticsPage analyticsPage;
     protected TeamViewPage teamViewPage;
 
