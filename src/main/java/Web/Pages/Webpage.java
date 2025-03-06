@@ -16,7 +16,7 @@ public class Webpage{
     public Webpage(WebDriver driver) {
         this.driver = driver;
         this.actions = new Actions(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
 

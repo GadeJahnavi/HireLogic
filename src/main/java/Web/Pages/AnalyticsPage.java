@@ -34,4 +34,12 @@ public class AnalyticsPage extends Webpage {
         }
 
     }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+    public String getPageURL() {
+        return driver.getCurrentUrl();
+    }
 }
