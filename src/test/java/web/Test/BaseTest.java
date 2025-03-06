@@ -10,6 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.asserts.SoftAssert;
 import utils.BrowserUtils;
 import utils.GeneralUtils;
 
@@ -21,11 +22,13 @@ public class BaseTest extends GeneralUtils {
     protected DashboardPage dashboardPage;
     protected Properties properties;
     protected GeneralUtils generalUtils;
+    protected SoftAssert softAssert;
 
     @BeforeTest
     public void setUp() {
         properties = loadProperties();
         generalUtils = new GeneralUtils();
+        softAssert = new SoftAssert();
         driver = generalUtils.getLocalDriver(properties);
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         dashboardPage = loginPage.login(properties.getProperty("username"), properties.getProperty("password"));

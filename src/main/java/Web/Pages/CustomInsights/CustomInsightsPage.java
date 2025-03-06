@@ -142,16 +142,6 @@ public class CustomInsightsPage extends Webpage {
         return count;
     }
 
-    public String getPageTitle() {
-        waitForVisibilityOfElement(createNewTemplateButtonElement);
-        return driver.getTitle();
-    }
-
-    public String getPageURL() {
-        waitForVisibilityOfElement(createNewTemplateButtonElement);
-        return driver.getCurrentUrl();
-    }
-
     public void selectCreateNewTemplateButton() {
         waitClickElement(interviewDropboxElement);
         waitClickElement(createNewTemplateButtonElement);
@@ -166,5 +156,10 @@ public class CustomInsightsPage extends Webpage {
         isVisible = useThisTemplateButtonElement.isDisplayed();
         waitClickElement(closeButton);
        return isVisible;
+    }
+
+    public String getPageURL() {
+        waitForVisibilityOfElement(interviewDropboxElement);
+        return driver.getCurrentUrl();
     }
 }

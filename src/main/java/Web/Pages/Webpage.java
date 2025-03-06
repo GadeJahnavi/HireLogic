@@ -75,4 +75,10 @@ public class Webpage{
         }
     }
 
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+
+
 }

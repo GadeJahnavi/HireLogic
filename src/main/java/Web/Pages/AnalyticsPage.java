@@ -3,11 +3,13 @@ package Web.Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class AnalyticsPage extends Webpage {
 
     public AnalyticsPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(css = "hl-perf-dash-time-interval-selector > div button:nth-child(4)")
@@ -18,6 +20,9 @@ public class AnalyticsPage extends Webpage {
 
     @FindBy(css = "ngx-date-picker  div[class='main-calendar-days'] >span:nth-child()")
     protected WebElement chooseDateFromCalendar;
+
+    @FindBy(css = "[value=\"team-view\"]")
+    protected WebElement teamViewButton;
 
     public void chooseOptions() {
         for (int i = 1; i <= 8; i++) {
@@ -35,11 +40,13 @@ public class AnalyticsPage extends Webpage {
 
     }
 
-    public String getPageTitle() {
-        return driver.getTitle();
+    public TeamViewPage navigateToTeamViewpage() {
+        waitClickElement(teamViewButton);
+        return new TeamViewPage(driver);
     }
 
     public String getPageURL() {
+        waitForVisibilityOfElement(teamViewButton);
         return driver.getCurrentUrl();
     }
 }
