@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -127,6 +128,16 @@ public class CustomInsightsPage extends Webpage {
 
         int count = listOfCustomTemplates.size();
         return count;
+    }
+
+    public String getPageTitle() {
+        waitForVisibilityOfElement(createFromTemplateButtonElement);
+        return driver.getTitle();
+    }
+
+    public String getPageURL() {
+        waitForVisibilityOfElement(createFromTemplateButtonElement);
+        return driver.getCurrentUrl();
     }
 
 }
