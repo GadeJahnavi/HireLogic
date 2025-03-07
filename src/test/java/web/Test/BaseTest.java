@@ -2,13 +2,12 @@ package web.Test;
 
 import Web.Pages.DashboardPage;
 import Web.Pages.LoginPage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
-import utils.BrowserUtils;
 import utils.GeneralUtils;
 
 import java.util.Properties;
