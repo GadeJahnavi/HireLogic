@@ -38,6 +38,7 @@ public class QuickMeetingPage extends Webpage {
         waitClickElement(quickInterviewElement);
         waitForVisibilityOfElement(choosePositionElement);
 
+
         moveAndClickAction(choosePositionElement);
         waitClickElement(positionOptionElement);
         waitForVisibilityOfElement(addCandidateElement);
