@@ -24,23 +24,17 @@ public class CustomInsightsTest extends BaseTest {
 //        Assert.assertEquals(countAfter, countBefore + 1);
 //    }
 
-//    @Test(priority = 1)
-//    public void createNewTemplateFromScratchTest() {
-//        int countBefore = customInsightsPage.getMyCustomTemplatesCount();
-//        customInsightsPage.createNewTemplateFromScratch();
-//        int countAfter = customInsightsPage.getMyCustomTemplatesCount();
-//
-//        Assert.assertEquals(countAfter, countBefore + 1);
-//    }
-//
-//    @Test(priority = 2)
-//    public void deleteCustomtemplateTest() {
-//        int countBefore = customInsightsPage.getMyCustomTemplatesCount();
-//        customInsightsPage.deleteCustomTemplate();
-//        int countAfter = customInsightsPage.getMyCustomTemplatesCount();
-//
-//        Assert.assertEquals(countAfter, countBefore - 1);
-//    }
+    @Test(priority = 1)
+    public void createNewTemplateFromScratchTest() {
+        customInsightsPage.createNewTemplateFromScratch();
+        Assert.assertTrue(customInsightsPage.isSuccessMessageAppears());
+    }
+
+    @Test(priority = 2)
+    public void deleteCustomTemplateTest() {
+        customInsightsPage.deleteCustomTemplate();
+        Assert.assertTrue(customInsightsPage.isDeleteMessageAppears());
+    }
 
     @Test
     public void TitleTest() {

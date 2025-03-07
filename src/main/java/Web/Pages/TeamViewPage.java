@@ -17,9 +17,7 @@ public class TeamViewPage extends Webpage {
 
     public String getPageHeader() {
         waitForVisibilityOfElement(pageHeaderElement);
-        String a =  pageHeaderElement.getText();
-        System.out.println("hello");
-        return a;
+        return pageHeaderElement.getText();
     }
 
     public String getPageURL() {
