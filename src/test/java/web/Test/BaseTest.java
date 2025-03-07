@@ -35,6 +35,10 @@ public class BaseTest extends GeneralUtils {
     @AfterTest
     public void tearDown() {
         dashboardPage.logout();
+    }
+
+    @AfterSuite
+    public void quitBrowser() {
         driver.quit();
     }
 }

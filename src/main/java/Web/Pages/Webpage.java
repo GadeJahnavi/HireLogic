@@ -79,6 +79,11 @@ public class Webpage{
         return driver.getTitle();
     }
 
+    public void clickEnter() {
+        actions.keyDown(Keys.ENTER).perform();
+        actions.keyUp(Keys.ENTER).perform();
+    }
+
 
 
 }

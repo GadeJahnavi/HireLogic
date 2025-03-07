@@ -1,5 +1,7 @@
 package web.Test;
 
+
+import org.testng.Assert;
 import Web.Pages.Meetings.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,8 +23,9 @@ public class MeetingsTest extends BaseTest {
     public void startNewInterview() {
         quickMeetingPage = meetingsPage.clickOnNewInterviewButton();
         interviewProgressPage = quickMeetingPage.quickInterview();
-        interviewProgressPage.finishInterviewProgress();
+        Boolean isFinish = interviewProgressPage.finishInterviewProgress();
         dashboardPage.goToMeetingsPage();
+        Assert.assertTrue(isFinish);
     }
 
     @Test(priority = 1)

@@ -35,13 +35,17 @@ public class QuickMeetingPage extends Webpage {
     }
 
     public InterviewProgressPage quickInterview() {
-//        waitClickElement(quickInterviewElement);
+        waitClickElement(quickInterviewElement);
+        waitForVisibilityOfElement(choosePositionElement);
+
 
         moveAndClickAction(choosePositionElement);
         waitClickElement(positionOptionElement);
+        waitForVisibilityOfElement(addCandidateElement);
 
         moveAndClickAction(addCandidateElement);
         candidateNameInputElement.sendKeys("Ka George");
+        clickEnter();
         waitClickElement(positionOptionElement);
 
 
