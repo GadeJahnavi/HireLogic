@@ -42,40 +42,43 @@ public class CustomInsightsTest extends BaseTest {
     }
 
     @Test(priority = 3)
-    public void searchTemplate() {
-        String searchKeyword = "Exit Interviews";
-        String elementVerify = customInsightsPage.searchTemplate(searchKeyword);
+    public void validatePageUrl() {
+        customInsightsPage.getPageUrl();
 
-        Assert.assertTrue(customInsightsPage.checkSearchElement(searchKeyword, elementVerify), "Search Failed");
+        Assert.assertTrue(customInsightsPage.getPageUrl());
     }
 
     @Test(priority = 4)
+    public void validateTitle() {
+        customInsightsPage.getTitle();
+
+        Assert.assertTrue(customInsightsPage.getTitle());
+    }
+
+    @Test(priority = 5)
+    public void searchTemplate() {
+        String searchKeyword = "Exit Interviews";
+        String verifySearch = customInsightsPage.searchTemplate(searchKeyword);
+        System.out.println(verifySearch);
+
+        Assert.assertTrue(customInsightsPage.isSearchElementFound(searchKeyword, verifySearch));
+    }
+
+    @Test(priority = 6)
     public void duplicateCustomTemplate() {
-        String field = customInsightsPage.duplicateTemplate();
-        System.out.println(field);
+        String duplicateTemplateCount = customInsightsPage.duplicateTemplate();
+
+        Assert.assertTrue(customInsightsPage.getTemplateCount(duplicateTemplateCount));
     }
 
     @Test(priority = 7)
     public void deleteCustomTemplate() {
-        customInsightsPage.deleteDuplicate();
+        String TemplateCountBefore = customInsightsPage.deleteDuplicate();
+        System.out.println(TemplateCountBefore);
+
+        Assert.assertTrue(customInsightsPage.getTemplateCount(TemplateCountBefore));
+
     }
-
-    @Test(priority = 5)
-    public void validateUrl() {
-        customInsightsPage.getUrl();
-        Assert.assertTrue(customInsightsPage.getUrl());
-    }
-
-    @Test(priority = 6)
-    public void validateTitle() {
-        customInsightsPage.getTitle();
-        Assert.assertTrue(customInsightsPage.getTitle());
-    }
-
-
-
-
-
 
 
 }

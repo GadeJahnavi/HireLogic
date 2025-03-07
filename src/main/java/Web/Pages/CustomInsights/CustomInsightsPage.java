@@ -72,7 +72,7 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(xpath = "//*[contains(text(), 'Exit Interviews')]")
     protected WebElement searchElement;
 
-    @FindBy(css = "hl-sit-template-preview > div > h2")
+    @FindBy(css = "datatable-body-cell > div > div > div > button")
     protected WebElement verifySearchElement;
 
     @FindBy(xpath = "//*[contains(text(), 'Back')]")
@@ -109,36 +109,56 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
     protected WebElement deleteConfirmButtonIconElement;
 
+    @FindBy(xpath = "//*[contains(text(), 'Showing')]")
+    protected WebElement customTemplateCount;
+
+    @FindBy(xpath = "//*[contains(text(), 'successfully deleted')]")
+    protected WebElement categoriesElement;
+
     public CustomInsightsPage(WebDriver driver) {
         super(driver);
     }
 
     public String duplicateTemplate() {
         waitClickElement(customTemplateTab);
+        waitForVisibilityOfElement(customTemplateCount);
+        String templateCount = customTemplateCount.getText();
+
         waitClickElement(duplicateButtonIconElement);
         waitClickElement(duplicateConfirmButton);
 
-        pauseExecution(2);
-//        waitClickElement(templateNameField);
-//        templateNameField.sendKeys("1");
-        String tempName = templateNameField.getText();
-
         waitForVisibilityOfElement(confirmSaveButtonElement);
         confirmSaveButtonElement.click();
+
         waitClickElement(saveTemplateButtonElement);
-        System.out.println("String name is" + tempName);
-        return tempName;
+        return templateCount;
     }
 
-    public void deleteDuplicate() {
-        waitForVisibilityOfElement(customTemplateTab);
-        System.out.println(customTemplateTab.getText());
+    public boolean getTemplateCount(String templateCount) {
+        waitForVisibilityOfElement(customTemplateCount);
+        waitForVisibilityOfElement(categoriesElement);
+//        pauseExecution(2);
+        String templateCountAfter = customTemplateCount.getText();
+        System.out.println(templateCountAfter);
+        if(!templateCountAfter.equalsIgnoreCase(templateCount)) {
+            return true;
+        }
+        return false;
+    }
+
+    public String deleteDuplicate() {
+        waitClickElement(customTemplateTab);
+        waitForVisibilityOfElement(customTemplateCount);
+        String templateCountBefore = customTemplateCount.getText();
+        System.out.println(templateCountBefore);
+
         waitClickElement(customTemplateTab);
         waitClickElement(deleteDuplicateButtonIconElement);
         waitClickElement(deleteConfirmButtonIconElement);
+        return templateCountBefore;
     }
 
-    public boolean getUrl() {
+    public boolean getPageUrl() {
         waitForVisibilityOfElement(defaultTextElement);
         String url = driver.getCurrentUrl();
         if(url.contains("custom-insights")) {
@@ -155,24 +175,24 @@ public class CustomInsightsPage extends Webpage {
         return false;
     }
 
-
-
     public String searchTemplate(String searchWord) {
         waitClickElement(searchElementForHireLogicTemp);
         waitClickElement(searchBarElement);
         searchBarElement.sendKeys(searchWord);
+
         waitForVisibilityOfElement(searchElement);
         searchElement.click();
-        String verifySearch = verifySearchElement.getText();
+
         waitClickElement(backButtonElement);
+        String verifySearch = verifySearchElement.getText();
         return verifySearch;
     }
 
-    public boolean checkSearchElement(String searchKeyword, String elementVerify) {
-        if (searchKeyword.equalsIgnoreCase(elementVerify)) {
+    public boolean isSearchElementFound(String verifySearch, String searchKeyword) {
+        if (verifySearch.equalsIgnoreCase(searchKeyword)) {
             return true;
         }
-        return true;
+        return false;
     }
 
     public void createNewTemplateFromScratch() {
