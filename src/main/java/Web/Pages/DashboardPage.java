@@ -25,7 +25,7 @@ public class DashboardPage extends Webpage {
     @FindBy(css = "hl-nav-nav-item-icon-wrapper >svg-icon[key = 'loupe']")
     protected WebElement analyzeInterviewsPage;
 
-    @FindBy(css = "hl-nav-nav-item-icon-wrapper >svg-icon[key = 'layout-blocks']")
+    @FindBy(css = "hl-nav-nav-item-icon-wrapper > svg-icon[key = 'layout-blocks']")
     protected WebElement customInsightsPage;
 
     @FindBy(css = "div[tpvariation='dropdown']")

@@ -63,8 +63,116 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(css = "datatable-header > div datatable-header-cell:nth-child(2) > div > div")
     protected WebElement createdByElement;
 
+    @FindBy(css = "hl-nav-tab[routerlink='hirelogic']")
+    protected WebElement searchElementForHireLogicTemp;
+
+    @FindBy(css = "hl-form-field > div > input[type='text']")
+    protected WebElement searchBarElement;
+
+    @FindBy(xpath = "//*[contains(text(), 'Exit Interviews')]")
+    protected WebElement searchElement;
+
+    @FindBy(css = "hl-sit-template-preview > div > h2")
+    protected WebElement verifySearchElement;
+
+    @FindBy(xpath = "//*[contains(text(), 'Back')]")
+    protected WebElement backButtonElement;
+
+    @FindBy(css = "hl-nav-tab[routerlink='custom']")
+    protected WebElement customTemplateTab;
+
+    @FindBy(xpath = "//*[contains(text(), 'Default')]")
+    protected WebElement defaultTextElement;
+
+    @FindBy(css = "datatable-selection > datatable-scroller > datatable-row-wrapper:first-child > " +
+            "datatable-body-row > div:nth-child(2) > datatable-body-cell:nth-child(5) > " +
+            "div > div > button:nth-child(3)")
+    protected WebElement duplicateButtonIconElement;
+
+    @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
+    protected WebElement duplicateConfirmButton;
+
+    @FindBy(css = "div[class='relative rounded flex h-full'] > input")
+    protected WebElement templateNameField;
+
+    @FindBy(css = "form > div > button:nth-child(2)")
+    protected WebElement confirmSaveButtonElement;
+
+    @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
+    protected WebElement saveTemplateButtonElement;
+
+    @FindBy(css = "datatable-selection > datatable-scroller > datatable-row-wrapper:first-child > " +
+            "datatable-body-row > div:nth-child(2) > datatable-body-cell:nth-child(5) > " +
+            "div > div > div:nth-child(5) > button")
+    protected WebElement deleteDuplicateButtonIconElement;
+
+    @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
+    protected WebElement deleteConfirmButtonIconElement;
+
     public CustomInsightsPage(WebDriver driver) {
         super(driver);
+    }
+
+    public String duplicateTemplate() {
+        waitClickElement(customTemplateTab);
+        waitClickElement(duplicateButtonIconElement);
+        waitClickElement(duplicateConfirmButton);
+
+        pauseExecution(2);
+//        waitClickElement(templateNameField);
+//        templateNameField.sendKeys("1");
+        String tempName = templateNameField.getText();
+
+        waitForVisibilityOfElement(confirmSaveButtonElement);
+        confirmSaveButtonElement.click();
+        waitClickElement(saveTemplateButtonElement);
+        System.out.println("String name is" + tempName);
+        return tempName;
+    }
+
+    public void deleteDuplicate() {
+        waitForVisibilityOfElement(customTemplateTab);
+        System.out.println(customTemplateTab.getText());
+        waitClickElement(customTemplateTab);
+        waitClickElement(deleteDuplicateButtonIconElement);
+        waitClickElement(deleteConfirmButtonIconElement);
+    }
+
+    public boolean getUrl() {
+        waitForVisibilityOfElement(defaultTextElement);
+        String url = driver.getCurrentUrl();
+        if(url.contains("custom-insights")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean getTitle() {
+        String title = driver.getTitle();
+        if(title.contains("HireLogic")) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public String searchTemplate(String searchWord) {
+        waitClickElement(searchElementForHireLogicTemp);
+        waitClickElement(searchBarElement);
+        searchBarElement.sendKeys(searchWord);
+        waitForVisibilityOfElement(searchElement);
+        searchElement.click();
+        String verifySearch = verifySearchElement.getText();
+        waitClickElement(backButtonElement);
+        return verifySearch;
+    }
+
+    public boolean checkSearchElement(String searchKeyword, String elementVerify) {
+        if (searchKeyword.equalsIgnoreCase(elementVerify)) {
+            return true;
+        }
+        return true;
     }
 
     public void createNewTemplateFromScratch() {

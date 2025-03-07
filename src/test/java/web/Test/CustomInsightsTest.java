@@ -40,4 +40,42 @@ public class CustomInsightsTest extends BaseTest {
 
         Assert.assertEquals(countAfter, countBefore - 1);
     }
+
+    @Test(priority = 3)
+    public void searchTemplate() {
+        String searchKeyword = "Exit Interviews";
+        String elementVerify = customInsightsPage.searchTemplate(searchKeyword);
+
+        Assert.assertTrue(customInsightsPage.checkSearchElement(searchKeyword, elementVerify), "Search Failed");
+    }
+
+    @Test(priority = 4)
+    public void duplicateCustomTemplate() {
+        String field = customInsightsPage.duplicateTemplate();
+        System.out.println(field);
+    }
+
+    @Test(priority = 7)
+    public void deleteCustomTemplate() {
+        customInsightsPage.deleteDuplicate();
+    }
+
+    @Test(priority = 5)
+    public void validateUrl() {
+        customInsightsPage.getUrl();
+        Assert.assertTrue(customInsightsPage.getUrl());
+    }
+
+    @Test(priority = 6)
+    public void validateTitle() {
+        customInsightsPage.getTitle();
+        Assert.assertTrue(customInsightsPage.getTitle());
+    }
+
+
+
+
+
+
+
 }

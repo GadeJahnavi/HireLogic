@@ -34,20 +34,20 @@ public class GeneralUtils {
         return properties;
     }
 
-//    public WebDriver getBrowser() {
-//
-//        String platform = properties.getProperty("platform");
-//        String browser = properties.getProperty("browser");
-//        if (platform.equalsIgnoreCase("cloud")) {
-//            return getCloudDriver(browser);
-//        } else if (platform.equalsIgnoreCase("local")) {
-//        }
-//        return getLocalDriver(browser);
-//    }
+    public WebDriver getBrowser() {
 
-//    public void getUrl() {
-//        driver.get(loadProperties("url"));
-//    }
+        String platform = properties.getProperty("platform");
+        String browser = properties.getProperty("browser");
+        if (platform.equalsIgnoreCase("cloud")) {
+            return getCloudDriver(browser);
+        } else if (platform.equalsIgnoreCase("local")) {
+        }
+        return getLocalDriver();
+    }
+
+    public void getUrl() {
+        driver.get(properties.getProperty("url"));
+    }
 
     private WebDriver getCloudDriver(String browser) {
         String userid = properties.getProperty("userid");
@@ -103,8 +103,8 @@ public class GeneralUtils {
             throw new RuntimeException("Please check the Sauce Labs URL", e);
         }
     }
-    public WebDriver getLocalDriver(Properties prop) {
-        String browser = prop.getProperty("browser");
+    public WebDriver getLocalDriver() {
+        String browser = properties.getProperty("browser");
         switch (browser.toLowerCase()) {
             case "safari":
                 driver= new SafariDriver();
@@ -121,7 +121,7 @@ public class GeneralUtils {
             default:
                 throw new RuntimeException("Incorrect Browser: " + browser);
         }
-        driver.get(prop.getProperty("url"));
+//        driver.get(properties.getProperty("url"));
         return driver;
     }
 }

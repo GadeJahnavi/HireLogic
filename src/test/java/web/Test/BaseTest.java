@@ -18,6 +18,9 @@ public class BaseTest extends GeneralUtils {
     @BeforeClass
     public void setUp() {
         properties = loadProperties();
+        getBrowser();
+        driver.manage().window().maximize();
+        getUrl();
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         dashboardPage = loginPage.login(properties.getProperty("username"), properties.getProperty("password"));
     }
