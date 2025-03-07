@@ -1,9 +1,8 @@
 package web.Test;
 
-import Web.Pages.Meetings.InterviewProgressPage;
-import Web.Pages.Meetings.MeetingsPage;
-import Web.Pages.Meetings.PastInterviewsPage;
-import Web.Pages.Meetings.QuickMeetingPage;
+
+import org.testng.Assert;
+import Web.Pages.Meetings.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -11,6 +10,7 @@ import org.testng.annotations.Test;
 public class MeetingsTest extends BaseTest {
     protected MeetingsPage meetingsPage;
     protected QuickMeetingPage quickMeetingPage;
+    protected ScheduleMeetingPage scheduleMeetingPage;
     protected InterviewProgressPage interviewProgressPage;
     protected PastInterviewsPage pastInterviewsPage;
 
@@ -21,12 +21,11 @@ public class MeetingsTest extends BaseTest {
 
     @Test(priority = 0)
     public void startNewInterview() {
-
         quickMeetingPage = meetingsPage.clickOnNewInterviewButton();
         interviewProgressPage = quickMeetingPage.quickInterview();
-        interviewProgressPage.finishInterviewProgress();
-
+        Boolean isFinish = interviewProgressPage.finishInterviewProgress();
         dashboardPage.goToMeetingsPage();
+        Assert.assertTrue(isFinish);
     }
 
     @Test(priority = 1)
@@ -41,6 +40,10 @@ public class MeetingsTest extends BaseTest {
         pastInterviewsPage.deleteTopPastInterviews();
     }
 
-
+    @Test(priority = 3)
+    public void scheduleInterview() {
+        scheduleMeetingPage = meetingsPage.chooseScheduleMeetingButton();
+        scheduleMeetingPage.newInterview();
+    }
 
 }

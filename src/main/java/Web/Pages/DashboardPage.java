@@ -60,7 +60,7 @@ public class DashboardPage extends Webpage {
     public AnalyticsPage goToAnalyticsPage() {
         waitForVisibilityOfElement(analyticsPage);
         waitClickElement(analyticsPage);
-        return PageFactory.initElements(driver, AnalyticsPage.class);
+        return new AnalyticsPage(driver);
     }
 
     public AnalyzeInterviewsPage goToAnalyzeInterviewsPage() {

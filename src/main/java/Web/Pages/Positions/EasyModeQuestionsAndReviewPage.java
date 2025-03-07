@@ -27,7 +27,7 @@ public class EasyModeQuestionsAndReviewPage extends Webpage {
     @FindBy(css = "hl-spw-question div[class='_category'] div>span.ng-arrow-wrapper")
     protected List<WebElement> categoryDropdownElements;
 
-    @FindBy(css = "hl-kit-sticky-bottom-container div > button")
+    @FindBy(css = "hl-kit-sticky-container button")
     protected WebElement newQuestionButtonElement;
 
     @FindBy(css = "hl-epw-review > div > button:nth-child(3)")

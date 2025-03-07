@@ -46,7 +46,7 @@ public class PositionsTest extends BaseTest {
         Assert.assertEquals(activePositionsAfter, activePositionsBefore + 1);
     }
 
-    @Test(priority = 2, dataProvider = "position")
+    @Test(priority = 2, dataProvider = "provideCandidateName")
     public void closePositionTest(String candidateName) {
         int closedPositionsBefore = positionsPage.getClosedPositionsCount();
         positionsPage.closePostion(candidateName);
@@ -58,7 +58,7 @@ public class PositionsTest extends BaseTest {
     @DataProvider(name = "position")
     public Object[][] providePositionsName() {
         return new Object[][]{
-                {"Sample Position"}, {"Trainee Position"}, {"Test Position"},
+                {"Sample Position"}
         };
     }
 

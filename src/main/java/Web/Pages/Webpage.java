@@ -16,7 +16,7 @@ public class Webpage{
     public Webpage(WebDriver driver) {
         this.driver = driver;
         this.actions = new Actions(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
 
@@ -74,5 +74,16 @@ public class Webpage{
             moveToElement(element);
         }
     }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+    public void clickEnter() {
+        actions.keyDown(Keys.ENTER).perform();
+        actions.keyUp(Keys.ENTER).perform();
+    }
+
+
 
 }
