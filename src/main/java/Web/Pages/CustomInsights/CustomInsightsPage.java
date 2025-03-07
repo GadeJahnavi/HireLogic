@@ -109,7 +109,7 @@ public class CustomInsightsPage extends Webpage {
     protected WebElement customTemplateCount;
 
     @FindBy(xpath = "//*[contains(text(), 'successfully deleted')]")
-    protected WebElement categoriesElement;
+    protected WebElement deletePopupElement;
 
     @FindBy(css = ".relative.rounded.flex.h-full> ng-select")
     protected WebElement interviewDropboxElement;
@@ -141,44 +141,39 @@ public class CustomInsightsPage extends Webpage {
         confirmSaveButtonElement.click();
 
         waitClickElement(saveTemplateButtonElement);
-        return templateCount;
-    }
-
-    public boolean getTemplateCount(String templateCount) {
         waitForVisibilityOfElement(customTemplateCount);
-        pauseExecution(2);
-        String templateCountAfter = customTemplateCount.getText();
-        if(!templateCountAfter.equalsIgnoreCase(templateCount)) {
-            return true;
-        }
-        return false;
+        return templateCount;
     }
 
     public String deleteDuplicate() {
         waitClickElement(customTemplateTab);
         waitForVisibilityOfElement(customTemplateCount);
         String templateCountBefore = customTemplateCount.getText();
-        System.out.println(templateCountBefore);
 
-        waitClickElement(customTemplateTab);
         waitClickElement(deleteDuplicateButtonIconElement);
         waitClickElement(deleteConfirmButtonIconElement);
+        waitForVisibilityOfElement(deletePopupElement);
         return templateCountBefore;
+    }
+
+    public boolean getTemplateCount(String templateCount) {
+        String templateCountAfter = customTemplateCount.getText();
+        return !templateCountAfter.equalsIgnoreCase(templateCount);
     }
 
     public boolean getPageUrl() {
         waitForVisibilityOfElement(defaultTextElement);
         String url = driver.getCurrentUrl();
-        if(url.contains("custom-insights")) {
-            return true;
+        if (url != null) {
+            return url.contains("custom-insights");
         }
         return false;
     }
 
     public boolean getTitle() {
         String title = driver.getTitle();
-        if(title.contains("HireLogic")) {
-            return true;
+        if (title != null) {
+            return title.equalsIgnoreCase("HireLogic");
         }
         return false;
     }
@@ -192,15 +187,11 @@ public class CustomInsightsPage extends Webpage {
         searchElement.click();
 
         waitClickElement(backButtonElement);
-        String verifySearch = verifySearchElement.getText();
-        return verifySearch;
+        return verifySearchElement.getText();
     }
 
     public boolean isSearchElementFound(String verifySearch, String searchKeyword) {
-        if (verifySearch.equalsIgnoreCase(searchKeyword)) {
-            return true;
-        }
-        return false;
+        return verifySearch.equalsIgnoreCase(searchKeyword);
     }
 
     public void createNewTemplateFromScratch() {

@@ -74,25 +74,20 @@ public class CustomInsightsTest extends BaseTest {
 
     @Test(priority = 5)
     public void searchTemplate() {
-        String searchKeyword = "Exit Interviews";
+        String searchKeyword = "Candidate Submission";
         String verifySearch = customInsightsPage.searchTemplate(searchKeyword);
-        System.out.println(verifySearch);
-
         Assert.assertTrue(customInsightsPage.isSearchElementFound(searchKeyword, verifySearch));
     }
 
     @Test(priority = 6)
     public void duplicateCustomTemplate() {
         String duplicateTemplateCount = customInsightsPage.duplicateTemplate();
-
         Assert.assertTrue(customInsightsPage.getTemplateCount(duplicateTemplateCount));
     }
 
     @Test(priority = 7)
     public void deleteCustomTemplate() {
         String TemplateCountBefore = customInsightsPage.deleteDuplicate();
-        System.out.println(TemplateCountBefore);
-
         Assert.assertTrue(customInsightsPage.getTemplateCount(TemplateCountBefore));
 
     }

@@ -7,5 +7,4 @@ public class Constants {
     public static final String ANALYTICS_PAGE_URL = "https://app.hirelogic.com/bhea-tech-inc/performance-dashboard";
     public static final String TEAM_VIEW_PAGE_URL = "https://app.hirelogic.com/bhea-tech-inc/performance-dashboard/team-view";
 
-
 }
