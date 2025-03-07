@@ -35,7 +35,7 @@ public class QuickMeetingPage extends Webpage {
     }
 
     public InterviewProgressPage quickInterview() {
-        waitClickElement(quickInterviewElement);
+//        waitClickElement(quickInterviewElement);
 
         moveAndClickAction(choosePositionElement);
         waitClickElement(positionOptionElement);
