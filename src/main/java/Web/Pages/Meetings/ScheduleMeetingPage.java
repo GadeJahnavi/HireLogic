@@ -76,6 +76,7 @@ public class ScheduleMeetingPage extends Webpage {
     public void newInterview() {
         choosePosition();
         chooseCandidate();
+        addCandidateEmail();
         addSubject();
         addTeamMembers();
         chooseInterviewMode();
@@ -85,13 +86,6 @@ public class ScheduleMeetingPage extends Webpage {
 //        waitClickElement(addPositionInputElement);
 //        addPositionInputElement.sendKeys("HR position");
 
-//        waitClickElement(addCandidateInputElement);
-//        addCandidateInputElement.sendKeys("George");
-
-//        waitClickElement(addEmailButtonElement);
-//        waitClickElement(emailInputElement);
-//        emailInputElement.sendKeys("random@ymail.com");
-//        waitClickElement(saveButtonElement);
         waitClickElement(scheduleButtonElement);
     }
 
@@ -101,8 +95,18 @@ public class ScheduleMeetingPage extends Webpage {
     }
 
     public void chooseCandidate() {
-        waitClickElement(addCandidateDropdownElement);
+//        waitClickElement(addCandidateDropdownElement);
+        waitClickElement(addCandidateInputElement);
+        addCandidateInputElement.sendKeys("Keth");
         waitClickElement(candidateOptionElement);
+
+    }
+
+    public void addCandidateEmail() {
+        waitClickElement(addEmailButtonElement);
+        waitClickElement(emailInputElement);
+        emailInputElement.sendKeys("random@ymail.com");
+        waitClickElement(saveButtonElement);
     }
 
     public void addSubject() {
