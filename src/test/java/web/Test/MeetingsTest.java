@@ -25,12 +25,6 @@ public class MeetingsTest extends BaseTest {
         dashboardPage.goToMeetingsPage();
     }
 
-    @Test(priority = 3)
-    public void scheduleInterview() {
-        scheduleMeetingPage = meetingsPage.chooseScheduleMeetingButton();
-        scheduleMeetingPage.newInterview();
-    }
-
     @Test(priority = 1)
     public void deletePastInterview() {
         pastInterviewsPage = meetingsPage.goToPastInterviews();
@@ -41,6 +35,12 @@ public class MeetingsTest extends BaseTest {
     public void deleteALLPastInterviews() {
         pastInterviewsPage = meetingsPage.goToPastInterviews();
         pastInterviewsPage.deleteTopPastInterviews();
+    }
+
+    @Test(priority = 3)
+    public void scheduleInterview() {
+        scheduleMeetingPage = meetingsPage.chooseScheduleMeetingButton();
+        scheduleMeetingPage.newInterview();
     }
 
 }
