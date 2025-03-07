@@ -12,36 +12,35 @@ public class AnalyticsPage extends Webpage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = "hl-perf-dash-time-interval-selector > div button:nth-child(4)")
-    protected WebElement chooseOptionElement;
+    @FindBy(css = "[tpplacement=\"bottom-start\"]")
+    protected WebElement filterButton;
 
-    @FindBy(css = "hl-perf-dash-time-interval-selector > div  button:nth-child(8)")
-    protected WebElement customOptionElement;
+    @FindBy(css = ".tippy-content button:nth-child(4)")
+    protected WebElement lastYearDropdownElement;
 
-    @FindBy(css = "ngx-date-picker  div[class='main-calendar-days'] >span:nth-child()")
-    protected WebElement chooseDateFromCalendar;
+    @FindBy(css = "hl-perf-dash-time-interval-selector > button > div")
+    protected WebElement filterButtonElement;
 
     @FindBy(css = "[value=\"team-view\"]")
     protected WebElement teamViewButton;
 
-    public void chooseOptions() {
-        for (int i = 1; i <= 8; i++) {
-            if (i < 8) {
-                waitClickElement(chooseOptionElement);
-            } else {
-                waitClickElement(customOptionElement);
-                for (int j = 4; j <= 20; j++) {
-                    if (j < 20) {
-                        waitClickElement(chooseDateFromCalendar);
-                    }
-                }
-            }
-        }
+    @FindBy(css = "._table-header-wrapper.ng-star-inserted > div:nth-child(2)")
+    protected WebElement teamMemberElement;
 
+
+    public void filterData() {
+        waitClickElement(filterButton);
+        waitClickElement(lastYearDropdownElement);
+    }
+
+    public String getFilterButtonText() {
+        waitForVisibilityOfElement(filterButtonElement);
+        return filterButtonElement.getText();
     }
 
     public TeamViewPage navigateToTeamViewpage() {
         waitClickElement(teamViewButton);
+        waitForVisibilityOfElement(teamMemberElement);
         return new TeamViewPage(driver);
     }
 

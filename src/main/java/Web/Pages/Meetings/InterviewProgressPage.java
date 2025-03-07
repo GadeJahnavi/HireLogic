@@ -38,18 +38,20 @@ public class InterviewProgressPage extends Webpage {
         super(driver);
     }
 
-    public void finishInterviewProgress() {
+    public Boolean finishInterviewProgress() {
         waitClickElement(doNotTranscribeButtonElement);
 
-        completeInterviewQuestion();
-        completeInterviewQuestion();
-        completeInterviewQuestion();
+//        completeInterviewQuestion();
+//        completeInterviewQuestion();
+//        completeInterviewQuestion();
 
         waitClickElement(finishButtonElement);
         waitClickElement(recommendLevelOption);
         waitClickElement(doneButtonElement);
         waitForVisibilityOfElement(completeInterviewPageElement);
+        Boolean isInterviewCompleted = completeInterviewPageElement.isDisplayed();
         waitClickElement(seeInterviewSummaryButtonElement);
+        return isInterviewCompleted;
     }
 
     public void completeInterviewQuestion() {

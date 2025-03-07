@@ -4,6 +4,7 @@ import Web.Pages.Meetings.InterviewProgressPage;
 import Web.Pages.Meetings.MeetingsPage;
 import Web.Pages.Meetings.PastInterviewsPage;
 import Web.Pages.Meetings.QuickMeetingPage;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,9 +25,9 @@ public class MeetingsTest extends BaseTest {
 
         quickMeetingPage = meetingsPage.clickOnNewInterviewButton();
         interviewProgressPage = quickMeetingPage.quickInterview();
-        interviewProgressPage.finishInterviewProgress();
-
+        Boolean isFinish = interviewProgressPage.finishInterviewProgress();
         dashboardPage.goToMeetingsPage();
+        Assert.assertTrue(isFinish);
     }
 
     @Test(priority = 1)

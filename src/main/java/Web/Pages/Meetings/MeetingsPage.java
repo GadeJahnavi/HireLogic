@@ -15,7 +15,7 @@ public class MeetingsPage extends Webpage {
     @FindBy(xpath = "//*[contains(text() , 'Upcoming Interviews')]")
     protected WebElement upcomingInterviewsButtonElement;
 
-    @FindBy(xpath = "//*[contains(text() , 'Past Interviews')]")
+    @FindBy(xpath = "//*[contains(text() , 'Past Meetings')]")
     protected WebElement pastInterviewsButtonElement;
 
     public MeetingsPage(WebDriver driver) {

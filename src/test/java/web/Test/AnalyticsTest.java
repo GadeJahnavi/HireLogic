@@ -1,46 +1,50 @@
 package web.Test;
 
+import Web.Pages.AnalyticsPage;
+import Web.Pages.TeamViewPage;
 import org.example.Testing;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utils.Constants;
 
-public class AnalyticsTest extends Testing {
-    @BeforeClass
-    public void setUp() {
-        driver = openBrowser("chrome");
-        driver.get("https://app.hirelogic.com");
-        waitForVisibility(15, "css", "input#email");
-        getElement("css", "input#email").sendKeys("madhoo@bhea.com");
-        waitForVisibility(15, "css", "input#password");
-        getElement("css", "input#password").sendKeys("MontrealBest@007");
-        waitClick(10, "css", "button[type='submit']");
+public class AnalyticsTest extends BaseTest {
+
+    protected AnalyticsPage analyticsPage;
+    protected TeamViewPage teamViewPage;
+
+    @BeforeMethod
+    public void classSetUp() {
+        analyticsPage = dashboardPage.goToAnalyticsPage();
     }
 
-    @AfterClass
-    public void tearDown() {
-       goToPage("logout");
+    @Test
+    public void analyticsPageTitleTest() {
+        String title = analyticsPage.getPageTitle();
+        Assert.assertEquals(title, Constants.PAGE_TITLE);
     }
 
-    @Test(priority = 0)
-    public void chooseOption() {
-        goToPage("analytics");
-        waitClick(5, "css", "hl-perf-dash-time-interval-selector > button");
-        String chooseOption = "hl-perf-dash-time-interval-selector > div button:nth-child(7)";
-        waitClick(5, "css", chooseOption);
+    @Test
+    public void analyticsPageURLTest() {
+        String url = analyticsPage.getPageURL();
+        Assert.assertTrue(url.contains(Constants.ANALYTICS_PAGE_URL));
     }
 
-    @Test(priority = 1)
-    public void chooseCustomOption() {
-        goToPage("analytics");
-        waitClick(5, "css", "hl-perf-dash-time-interval-selector > button");
+    @Test
+    public void filterAnalyticPageTest() {
+        analyticsPage.filterData();
+        Assert.assertEquals(analyticsPage.getFilterButtonText(), "Last 12 months");
+    }
 
-        String customButtonSelector = "hl-perf-dash-time-interval-selector > div  button:nth-child(8)";
-        waitClick(5, "css", customButtonSelector);
-
-        String chooseDateSelector = "ngx-date-picker  div[class='main-calendar-days'] >span:nth-child(13)";
-        waitClick(5, "css", chooseDateSelector);
-        waitClick(5, "css", chooseDateSelector);
+    @Test
+    public void navigateToTeamViewPage() {
+        teamViewPage = analyticsPage.navigateToTeamViewpage();
+        softAssert.assertEquals(teamViewPage.getPageTitle(), Constants.PAGE_TITLE);
+        softAssert.assertEquals(teamViewPage.getPageURL(), Constants.TEAM_VIEW_PAGE_URL);
+        softAssert.assertEquals(teamViewPage.getPageHeader(), Constants.TEAM_VIEW_PAGE_TITLE);
+        softAssert.assertAll();
     }
 
 }
