@@ -121,6 +121,7 @@ public class GeneralUtils {
             default:
                 throw new RuntimeException("Incorrect Browser: " + browser);
         }
+        driver.manage().window().maximize();
         driver.get(prop.getProperty("url"));
         return driver;
     }

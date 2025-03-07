@@ -63,6 +63,20 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(css = "datatable-header > div datatable-header-cell:nth-child(2) > div > div")
     protected WebElement createdByElement;
 
+    @FindBy(css = ".relative.rounded.flex.h-full> ng-select")
+    protected WebElement interviewDropboxElement;
+
+    @FindBy(css = "[class=\"flex flex-row gap-4 justify-center ng-star-inserted\"] > button:first-child")
+    protected WebElement cancelButtonElement;
+
+    @FindBy(css = "hl-sit-template-list-item:nth-child(1) button:nth-child(2)")
+    protected WebElement HireLogicDefaultInsightElement;
+
+    @FindBy(css = "div[class *= \"flex-none f\"]> button:last-child")
+    protected WebElement useThisTemplateElement;
+
+    @FindBy(css = "[class*=\"absolute r\"]")
+    protected WebElement closeButton;
     public CustomInsightsPage(WebDriver driver) {
         super(driver);
     }
@@ -113,7 +127,6 @@ public class CustomInsightsPage extends Webpage {
         waitForVisibilityOfElement(myCustomTemplateElement);
         waitClickElement(myCustomTemplateElement);
         waitForVisibilityOfElement(createdByElement);
-
 //        Wait<WebDriver> wait = new FluentWait<>(driver)
 //                .withTimeout(Duration.ofSeconds(20))
 //                .pollingEvery(Duration.ofMillis(250))
@@ -129,4 +142,24 @@ public class CustomInsightsPage extends Webpage {
         return count;
     }
 
+    public void selectCreateNewTemplateButton() {
+        waitClickElement(interviewDropboxElement);
+        waitClickElement(createNewTemplateButtonElement);
+        waitClickElement(createFromTemplateButtonElement);
+        waitClickElement(HireLogicDefaultInsightElement);
+
+    }
+
+    public Boolean isTemplateButtonVisible() {
+       waitForVisibilityOfElement(useThisTemplateElement);
+       boolean isVisible;
+        isVisible = useThisTemplateButtonElement.isDisplayed();
+        waitClickElement(closeButton);
+       return isVisible;
+    }
+
+    public String getPageURL() {
+        waitForVisibilityOfElement(interviewDropboxElement);
+        return driver.getCurrentUrl();
+    }
 }
