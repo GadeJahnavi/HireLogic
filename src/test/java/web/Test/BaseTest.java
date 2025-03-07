@@ -3,8 +3,11 @@ package web.Test;
 import Web.Pages.DashboardPage;
 import Web.Pages.LoginPage;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.asserts.SoftAssert;
 import utils.GeneralUtils;
 
 import java.util.Properties;
@@ -14,32 +17,25 @@ public class BaseTest extends GeneralUtils {
 
     protected DashboardPage dashboardPage;
     protected Properties properties;
+    protected SoftAssert softAssert;
 
-    @BeforeClass
-    public void setUp() {
+    @Parameters("browser")
+    @BeforeTest
+    public void setUp(@Optional String browserName) {
         properties = loadProperties();
-        getLocalDriver(properties);
+        softAssert = new SoftAssert();
+        if (browserName != null) {
+            properties.setProperty("browser", browserName);
+        }
+        driver = getLocalDriver(properties);
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         dashboardPage = loginPage.login(properties.getProperty("username"), properties.getProperty("password"));
     }
 
-//    @BeforeClass
-//    public void setUp() {
-//        optionType = System.getProperty("platform","local");
-//        userid = System.getProperty("userid");
-//        accessKey = System.getProperty("key");
-//        browserType = System.getProperty("browser","chrome");
-//        driver = getBrowser(optionType, browserType);
-//        driver.get("https://app.hirelogic.com");
-//        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-//        dashboardPage = loginPage.login("madhoo@bhea.com", "MontrealBest@007");
-//    }
-
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         dashboardPage.logout();
         driver.quit();
     }
-
 }
 
