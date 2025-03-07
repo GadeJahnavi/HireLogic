@@ -63,14 +63,12 @@ public class CustomInsightsTest extends BaseTest {
     @Test(priority = 3)
     public void validatePageUrl() {
         customInsightsPage.getPageUrl();
-
         Assert.assertTrue(customInsightsPage.getPageUrl());
     }
 
     @Test(priority = 4)
     public void validateTitle() {
         customInsightsPage.getTitle();
-
         Assert.assertTrue(customInsightsPage.getTitle());
     }
 

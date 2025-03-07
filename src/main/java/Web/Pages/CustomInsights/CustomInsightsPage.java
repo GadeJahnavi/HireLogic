@@ -84,9 +84,7 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(xpath = "//*[contains(text(), 'Default')]")
     protected WebElement defaultTextElement;
 
-    @FindBy(css = "datatable-selection > datatable-scroller > datatable-row-wrapper:first-child > " +
-            "datatable-body-row > div:nth-child(2) > datatable-body-cell:nth-child(5) > " +
-            "div > div > button:nth-child(3)")
+    @FindBy(css = "datatable-row-wrapper:first-child button:nth-child(3)")
     protected WebElement duplicateButtonIconElement;
 
     @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
@@ -101,9 +99,7 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
     protected WebElement saveTemplateButtonElement;
 
-    @FindBy(css = "datatable-selection > datatable-scroller > datatable-row-wrapper:first-child > " +
-            "datatable-body-row > div:nth-child(2) > datatable-body-cell:nth-child(5) > " +
-            "div > div > div:nth-child(5) > button")
+    @FindBy(css = "datatable-row-wrapper:first-child div:nth-child(5) > button")
     protected WebElement deleteDuplicateButtonIconElement;
 
     @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
@@ -150,10 +146,8 @@ public class CustomInsightsPage extends Webpage {
 
     public boolean getTemplateCount(String templateCount) {
         waitForVisibilityOfElement(customTemplateCount);
-        waitForVisibilityOfElement(categoriesElement);
-//        pauseExecution(2);
+        pauseExecution(2);
         String templateCountAfter = customTemplateCount.getText();
-        System.out.println(templateCountAfter);
         if(!templateCountAfter.equalsIgnoreCase(templateCount)) {
             return true;
         }
