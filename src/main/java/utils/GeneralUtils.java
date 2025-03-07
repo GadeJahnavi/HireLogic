@@ -33,7 +33,7 @@ public class GeneralUtils {
         }
         return properties;
     }
-
+//
 //    public WebDriver getBrowser() {
 //
 //        String platform = properties.getProperty("platform");
@@ -42,11 +42,11 @@ public class GeneralUtils {
 //            return getCloudDriver(browser);
 //        } else if (platform.equalsIgnoreCase("local")) {
 //        }
-//        return getLocalDriver(browser);
+//        return getLocalDriver();
 //    }
 
 //    public void getUrl() {
-//        driver.get(loadProperties("url"));
+//        driver.get(properties.getProperty("url"));
 //    }
 
     private WebDriver getCloudDriver(String browser) {
@@ -104,7 +104,7 @@ public class GeneralUtils {
         }
     }
     public WebDriver getLocalDriver(Properties prop) {
-        String browser = prop.getProperty("browser");
+        String browser = properties.getProperty("browser");
         switch (browser.toLowerCase()) {
             case "safari":
                 driver= new SafariDriver();

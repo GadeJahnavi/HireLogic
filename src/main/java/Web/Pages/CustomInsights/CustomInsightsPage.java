@@ -63,6 +63,54 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(css = "datatable-header > div datatable-header-cell:nth-child(2) > div > div")
     protected WebElement createdByElement;
 
+    @FindBy(css = "hl-nav-tab[routerlink='hirelogic']")
+    protected WebElement searchElementForHireLogicTemp;
+
+    @FindBy(css = "hl-form-field > div > input[type='text']")
+    protected WebElement searchBarElement;
+
+    @FindBy(xpath = "//*[contains(text(), 'Exit Interviews')]")
+    protected WebElement searchElement;
+
+    @FindBy(css = "datatable-body-cell > div > div > div > button")
+    protected WebElement verifySearchElement;
+
+    @FindBy(xpath = "//*[contains(text(), 'Back')]")
+    protected WebElement backButtonElement;
+
+    @FindBy(css = "hl-nav-tab[routerlink='custom']")
+    protected WebElement customTemplateTab;
+
+    @FindBy(xpath = "//*[contains(text(), 'Default')]")
+    protected WebElement defaultTextElement;
+
+    @FindBy(css = "datatable-row-wrapper:first-child button:nth-child(3)")
+    protected WebElement duplicateButtonIconElement;
+
+    @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
+    protected WebElement duplicateConfirmButton;
+
+    @FindBy(css = "div[class='relative rounded flex h-full'] > input")
+    protected WebElement templateNameField;
+
+    @FindBy(css = "form > div > button:nth-child(2)")
+    protected WebElement confirmSaveButtonElement;
+
+    @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
+    protected WebElement saveTemplateButtonElement;
+
+    @FindBy(css = "datatable-row-wrapper:first-child div:nth-child(5) > button")
+    protected WebElement deleteDuplicateButtonIconElement;
+
+    @FindBy(css = "hirelogic-app-confirm-dialog div > button:nth-child(2)")
+    protected WebElement deleteConfirmButtonIconElement;
+
+    @FindBy(xpath = "//*[contains(text(), 'Showing')]")
+    protected WebElement customTemplateCount;
+
+    @FindBy(xpath = "//*[contains(text(), 'successfully deleted')]")
+    protected WebElement deletePopupElement;
+
     @FindBy(css = ".relative.rounded.flex.h-full> ng-select")
     protected WebElement interviewDropboxElement;
 
@@ -79,6 +127,71 @@ public class CustomInsightsPage extends Webpage {
     protected WebElement closeButton;
     public CustomInsightsPage(WebDriver driver) {
         super(driver);
+    }
+
+    public String duplicateTemplate() {
+        waitClickElement(customTemplateTab);
+        waitForVisibilityOfElement(customTemplateCount);
+        String templateCount = customTemplateCount.getText();
+
+        waitClickElement(duplicateButtonIconElement);
+        waitClickElement(duplicateConfirmButton);
+
+        waitForVisibilityOfElement(confirmSaveButtonElement);
+        confirmSaveButtonElement.click();
+
+        waitClickElement(saveTemplateButtonElement);
+        waitForVisibilityOfElement(customTemplateCount);
+        return templateCount;
+    }
+
+    public String deleteDuplicate() {
+        waitClickElement(customTemplateTab);
+        waitForVisibilityOfElement(customTemplateCount);
+        String templateCountBefore = customTemplateCount.getText();
+
+        waitClickElement(deleteDuplicateButtonIconElement);
+        waitClickElement(deleteConfirmButtonIconElement);
+        waitForVisibilityOfElement(deletePopupElement);
+        return templateCountBefore;
+    }
+
+    public boolean getTemplateCount(String templateCount) {
+        String templateCountAfter = customTemplateCount.getText();
+        return !templateCountAfter.equalsIgnoreCase(templateCount);
+    }
+
+    public boolean getPageUrl() {
+        waitForVisibilityOfElement(defaultTextElement);
+        String url = driver.getCurrentUrl();
+        if (url != null) {
+            return url.contains("custom-insights");
+        }
+        return false;
+    }
+
+    public boolean getTitle() {
+        String title = driver.getTitle();
+        if (title != null) {
+            return title.equalsIgnoreCase("HireLogic");
+        }
+        return false;
+    }
+
+    public String searchTemplate(String searchWord) {
+        waitClickElement(searchElementForHireLogicTemp);
+        waitClickElement(searchBarElement);
+        searchBarElement.sendKeys(searchWord);
+
+        waitForVisibilityOfElement(searchElement);
+        searchElement.click();
+
+        waitClickElement(backButtonElement);
+        return verifySearchElement.getText();
+    }
+
+    public boolean isSearchElementFound(String verifySearch, String searchKeyword) {
+        return verifySearch.equalsIgnoreCase(searchKeyword);
     }
 
     public void createNewTemplateFromScratch() {

@@ -34,8 +34,6 @@ public class LoginPage extends Webpage {
         waitForVisibilityOfElement(avatarButton);
         return PageFactory.initElements(driver, DashboardPage.class);
     }
-
-
 }
 
 

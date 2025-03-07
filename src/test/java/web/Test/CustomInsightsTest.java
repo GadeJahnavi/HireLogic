@@ -59,4 +59,38 @@ public class CustomInsightsTest extends BaseTest {
         customInsightsPage.selectCreateNewTemplateButton();
         Assert.assertTrue(customInsightsPage.isTemplateButtonVisible());
     }
+
+    @Test(priority = 3)
+    public void validatePageUrl() {
+        customInsightsPage.getPageUrl();
+        Assert.assertTrue(customInsightsPage.getPageUrl());
+    }
+
+    @Test(priority = 4)
+    public void validateTitle() {
+        customInsightsPage.getTitle();
+        Assert.assertTrue(customInsightsPage.getTitle());
+    }
+
+    @Test(priority = 5)
+    public void searchTemplate() {
+        String searchKeyword = "Candidate Submission";
+        String verifySearch = customInsightsPage.searchTemplate(searchKeyword);
+        Assert.assertTrue(customInsightsPage.isSearchElementFound(searchKeyword, verifySearch));
+    }
+
+    @Test(priority = 6)
+    public void duplicateCustomTemplate() {
+        String duplicateTemplateCount = customInsightsPage.duplicateTemplate();
+        Assert.assertTrue(customInsightsPage.getTemplateCount(duplicateTemplateCount));
+    }
+
+    @Test(priority = 7)
+    public void deleteCustomTemplate() {
+        String TemplateCountBefore = customInsightsPage.deleteDuplicate();
+        Assert.assertTrue(customInsightsPage.getTemplateCount(TemplateCountBefore));
+
+    }
+
+
 }
