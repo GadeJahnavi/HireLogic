@@ -1,6 +1,7 @@
 package Web.Pages.Positions;
 
 import Web.Pages.Webpage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,7 @@ public class PositionsPage extends Webpage {
     @FindBy(css = "hl-kit-appsection-subheader button")
     protected WebElement interviewGuideButtonElement;
 
+    @FindBy(css = "hl-s-iwd-interview-candidate-select > hl-form-field:last-child > div:last-child")
     protected WebElement addCandidateOptionElement;
 
     @FindBy(css = "hl-nav-tab > span[class='text-bold']" )
@@ -101,6 +103,7 @@ public class PositionsPage extends Webpage {
 
         moveAndClickAction(addCandidateElement);
         candidateNameInputElement.sendKeys(candidateName);
+        pressKey(Keys.ENTER);
 
         moveAndClickAction(addCandidateOptionElement);
 

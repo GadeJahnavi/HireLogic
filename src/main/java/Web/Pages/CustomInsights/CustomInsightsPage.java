@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,8 +22,8 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(css = "hl-form-field  input[formcontrolname='name']")
     protected WebElement templateNameElement;
 
-    @FindBy(css = "hl-kit-accordion2 ng-select > div > span")
-    protected List<WebElement> categoryDropdowns;
+    @FindBy(css = ".grid.grid-cols-2.items-start.gap-4 > hl-form-field:first-child input")
+    protected WebElement categoryDropdowns;
 
     @FindBy(css = "div[role='listbox'] > div:nth-child(2) >div:nth-child(1)")
     protected WebElement chooseOption1;
@@ -75,6 +76,12 @@ public class CustomInsightsPage extends Webpage {
     @FindBy(css = "div[class *= \"flex-none f\"]> button:last-child")
     protected WebElement useThisTemplateElement;
 
+    @FindBy(css = "[style=\"position: relative; height: 100%;\"] > div  dynamic-view")
+    protected WebElement successDeleteMessageElement;
+
+    @FindBy(css = "dynamic-view")
+    protected WebElement successMessageElement;
+
     @FindBy(css = "[class*=\"absolute r\"]")
     protected WebElement closeButton;
     public CustomInsightsPage(WebDriver driver) {
@@ -88,15 +95,18 @@ public class CustomInsightsPage extends Webpage {
         waitClickElement(templateNameElement);
         String timeNow = new SimpleDateFormat("ddMMss").format(new Date());
         templateNameElement.sendKeys("Sample template" + timeNow);
-
-        WebElement addCategoryDropdown = (categoryDropdowns).get(0);
-        moveAndClickAction(addCategoryDropdown);
+        waitClickElement(categoryDropdowns);
         moveAndClickAction(chooseOption1);
 
         moveToElement(helpButtonElement);
 
         moveAndClickAction(saveButtonElement);
         waitClickElement(confirmSaveElement);
+    }
+
+    public Boolean isSuccessMessageAppears() {
+        waitForVisibilityOfElement(successMessageElement);
+        return successMessageElement.isDisplayed();
     }
 
     public void createNewTemplateFromTemplate() {
@@ -112,10 +122,16 @@ public class CustomInsightsPage extends Webpage {
         waitClickElement(confirmSaveElement);
     }
 
-    public void deleteCustomTemplate() {
+    public CustomInsightsPage deleteCustomTemplate() {
         waitClickElement(myCustomTemplateElement);
         deleteIcon.get(5).click();
         confirmDeleteIcon.get(1).click();
+        return PageFactory.initElements(driver,CustomInsightsPage.class);
+    }
+
+    public Boolean isDeleteMessageAppears() {
+        waitForVisibilityOfElement(successDeleteMessageElement);
+        return successDeleteMessageElement.isDisplayed();
     }
 
     public String getInnerHTML(String css) {

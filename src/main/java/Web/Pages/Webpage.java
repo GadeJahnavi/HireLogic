@@ -84,6 +84,10 @@ public class Webpage{
         actions.keyUp(Keys.ENTER).perform();
     }
 
+    public void pressKey(Keys key) {
+        actions.keyDown(key).release().perform();
+    }
+
 
 
 }

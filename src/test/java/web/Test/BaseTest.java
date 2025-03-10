@@ -3,10 +3,7 @@ package web.Test;
 import Web.Pages.DashboardPage;
 import Web.Pages.LoginPage;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import utils.GeneralUtils;
 
@@ -32,12 +29,12 @@ public class BaseTest extends GeneralUtils {
         dashboardPage = loginPage.login(properties.getProperty("username"), properties.getProperty("password"));
     }
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         dashboardPage.logout();
     }
 
-    @AfterSuite
+    @AfterTest
     public void quitBrowser() {
         driver.quit();
     }

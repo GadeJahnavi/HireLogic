@@ -2,7 +2,7 @@ package dataProvider;
 
 import org.testng.annotations.DataProvider;
 
-public class DataProviderHirelogic {
+public class DataProviderHireLogic {
 
     @DataProvider(name = "position")
     public Object[][] providePositionsName() {

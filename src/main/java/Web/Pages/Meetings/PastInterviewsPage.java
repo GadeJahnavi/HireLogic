@@ -36,7 +36,4 @@ public class PastInterviewsPage extends Webpage {
         waitClickElement(deleteButtonElement);
         waitClickElement(confirmDeleteButtonElement);
     }
-
-
-
 }

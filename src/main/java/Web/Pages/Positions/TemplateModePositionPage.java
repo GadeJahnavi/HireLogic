@@ -16,8 +16,11 @@ public class TemplateModePositionPage extends Webpage {
     @FindBy(css = "hl-templates-template-item > div:nth-child(2)")
     protected List<WebElement> templateElements;
 
-    @FindBy(css = "hl-kit-sticky-bottom-container > div > button:nth-child(1)")
+    @FindBy(css = "[class*=\"flex flex-row g\"] > button:first-child")
     protected WebElement useJobTemplateButtonElement;
+
+    @FindBy(xpath = "//*[text() = \" Job Description \"]")
+    protected WebElement jobDescriptionElement;
 
 
     public TemplateModePositionPage(WebDriver driver) {
@@ -26,7 +29,7 @@ public class TemplateModePositionPage extends Webpage {
 
     public PositionDetailsPage templateModePosition() {
         waitForVisibilityOfElement(createNewJobTemplateButtonElement);
-
+        waitForVisibilityOfElement(jobDescriptionElement);
         WebElement accountExecutive = templateElements.get(0);
         waitClickElement(accountExecutive);
 
