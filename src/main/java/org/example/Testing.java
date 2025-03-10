@@ -29,6 +29,7 @@ public class Testing {
 //            driver.manage().window().setSize(screenSize);
         } else {
             System.out.println("Browser Unavailable " + browserName);
+            System.out.println("kjhukh");
         }
         return driver;
     }
