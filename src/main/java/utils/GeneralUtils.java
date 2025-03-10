@@ -34,21 +34,6 @@ public class GeneralUtils {
         return properties;
     }
 
-//    public WebDriver getBrowser() {
-//
-//        String platform = properties.getProperty("platform");
-//        String browser = properties.getProperty("browser");
-//        if (platform.equalsIgnoreCase("cloud")) {
-//            return getCloudDriver(browser);
-//        } else if (platform.equalsIgnoreCase("local")) {
-//        }
-//        return getLocalDriver(browser);
-//    }
-
-//    public void getUrl() {
-//        driver.get(loadProperties("url"));
-//    }
-
     private WebDriver getCloudDriver(String browser) {
         String userid = properties.getProperty("userid");
         String accessKey = properties.getProperty("accessKey");

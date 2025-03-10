@@ -2,10 +2,7 @@ package web.Test;
 
 import Web.Pages.AnalyticsPage;
 import Web.Pages.TeamViewPage;
-import org.example.Testing;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.Constants;

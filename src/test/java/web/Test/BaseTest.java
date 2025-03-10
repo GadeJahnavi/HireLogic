@@ -29,12 +29,12 @@ public class BaseTest extends GeneralUtils {
         dashboardPage = loginPage.login(properties.getProperty("username"), properties.getProperty("password"));
     }
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         dashboardPage.logout();
     }
 
-    @AfterSuite
+    @AfterTest
     public void quitBrowser() {
         driver.quit();
     }

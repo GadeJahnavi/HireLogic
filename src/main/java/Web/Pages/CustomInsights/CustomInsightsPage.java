@@ -95,9 +95,6 @@ public class CustomInsightsPage extends Webpage {
         waitClickElement(templateNameElement);
         String timeNow = new SimpleDateFormat("ddMMss").format(new Date());
         templateNameElement.sendKeys("Sample template" + timeNow);
-
-//        WebElement addCategoryDropdown = (categoryDropdowns).get(0);
-//        moveAndClickAction(addCategoryDropdown);
         waitClickElement(categoryDropdowns);
         moveAndClickAction(chooseOption1);
 
